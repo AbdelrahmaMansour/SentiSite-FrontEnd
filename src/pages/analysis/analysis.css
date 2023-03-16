@@ -1,0 +1,14 @@
+
+.analysis{
+  display: flex;
+  font-family: var(--font-family);
+  text-align: center;
+  padding: 10rem;
+  background:radial-gradient(circle at 7% 85%, rgba(53, 66, 151, 1) 0%, rgba(0, 20, 19, 1) 100%);
+}
+
+
+
+text {
+  color: white;
+}
