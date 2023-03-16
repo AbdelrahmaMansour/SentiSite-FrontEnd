@@ -15,10 +15,6 @@ const Signin = () => {
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
 
-  const [data,setData]= useState({
-    email:"",
-    password: "",
-  })
 
 
 
@@ -35,24 +31,17 @@ const Signin = () => {
     }
   }
   const handleSubmit = (e) => {
-    setData({
-      email:email,
-      password: password,
+    e.preventDefault();
+    axios.post('http://localhost:3030/api/v1/auth/sign-in', {
+      email,
+      password
     })
-    console.log(data)
-    
-    axios.post('http://localhost:3030/api/v1/auth/sign-in', 
-    data
-    )
     .then(function (response) {
       console.log(response);
-      alert("habibiiiiii")
     })
     .catch(function (error) {
       console.log(error);
-      alert("ma3rafaksh")
     });
-    e.preventDefault();
   };
 
   return (
@@ -64,18 +53,18 @@ const Signin = () => {
           <img  src={lc} alt='logo' />
           <h1>WELCOME BACK !</h1>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form >
             <div className='ss__signin-container_input-place'>
               <div className='ss__signin-input_with_tag'>
                 <p>Email</p>
-                <input type='email' name='Email' onChange={(e)=>setEmail(e.target.value)}/>
+                <input type='email' name='Email' value={email} onChange={(e)=>setEmail(e.target.value)}/>
               </div>
               <img src={emailimg} alt='email' />
             </div>
             <div className='ss__signin-container_input-place'>
               <div className='ss__signin-input_with_tag'>
                 <p>Password</p>
-                <input type={pass} name='Password' onChange={(e)=>setPassword(e.target.value)}/>
+                <input type={pass} name='Password' value={password} onChange={(e)=>setPassword(e.target.value)}/>
               </div>
               {hide ? (
                 <img src={openEye} alt='openEye' onClick={hideTogel} />
@@ -96,7 +85,7 @@ const Signin = () => {
             Don't have an account?<Link to='/signup'> <span id='ss__signin-si'>Sign Up</span></Link>
             </p>
             <div className='ss__signin-links_iconss'>
-              <button id='ss__signin-button' type='submit'>
+              <button id='ss__signin-button' type='submit' onClick={handleSubmit}>
               Sign In
               </button>
             </div>

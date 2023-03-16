@@ -19,14 +19,6 @@ const Signup = () => {
   const [password,setPassword]=useState("")
   const [confirmPassword,setConfirmPassword]=useState("")
 
-  const [data,setData]= useState({
-    name:"",
-    email:"",
-    password: "",
-    rePassword: ""
-  })
-
-
 
 
   const [hide1, setHide1] = useState(true);
@@ -56,14 +48,15 @@ const Signup = () => {
   }
 
   const handleSubmit = (e) => {
-    setData({
+    e.preventDefault();
+
+    axios.post('http://localhost:3030/api/v1/auth/sign-up', 
+    {
       name:firstName+" "+lastName,
       email:email,
       password: password,
       rePassword: confirmPassword
-    })
-    axios.post('http://localhost:3030/api/v1/auth/sign-up', 
-    data
+    }
     )
     .then(function (response) {
       console.log(response);
@@ -71,9 +64,7 @@ const Signup = () => {
     .catch(function (error) {
       console.log(error);
     });
-    
-    e.preventDefault();
-  };
+      };
 
   return (
     <div className='gradient__bg'>
