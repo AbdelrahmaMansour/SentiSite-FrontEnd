@@ -11,6 +11,7 @@ import {
   Editprofile,
   Fpassword,
   Rpassword,
+  Verify,
 } from "./pages";
 import { Routes, Route } from "react-router-dom";
 
@@ -27,6 +28,7 @@ const App = () => {
         <Route path='editprofile' element={<Editprofile />} />
         <Route path='f' element={<Fpassword />} />
         <Route path='r' element={<Rpassword />} />
+        <Route path='verify' element={<Verify />} />
       </Routes>
     </div>
   );

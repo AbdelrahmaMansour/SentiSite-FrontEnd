@@ -3,12 +3,21 @@ import './editprofile.css'
 import pro from '../../assets/pro.svg';
 import cancel from '../../assets/Cancel.svg';
 import { Footer } from "../../Containers";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import name from "../../assets/name.svg";
 import openEye from "../../assets/openEye.svg";
 import closedEye from "../../assets/closedEye.svg";
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const Editprofile = () => {
+  const navigate =useNavigate()
+  const user = useSelector((state) => state.data.user);
+  useEffect(() => {
+    if (!user) {
+      navigate("/", { replace: true });
+    }
+  }, []);
   const [hide1, setHide1] = useState(true);
   const [pass1, setPass1] = useState("password");
 

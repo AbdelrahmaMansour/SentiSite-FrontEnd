@@ -9,15 +9,22 @@ import google from "../../assets/google.svg";
 import twitter from "../../assets/twitter.svg";
 import facebok from "../../assets/facebook.svg";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { registerInitiate } from "../../redux/actions";
+import { useEffect } from "react";
+
+
 
 const Signup = () => {
-  
+  const user = useSelector((state)=>state.data.user)
+  const error = useSelector((state)=>state.data.error)
   const [firstName,setFirstName]=useState("")
   const [lastName,setLastName]=useState("")
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
   const [confirmPassword,setConfirmPassword]=useState("")
+  
 
 
 
@@ -46,33 +53,35 @@ const Signup = () => {
       setPass2("password");
     }
   }
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const dispatch = useDispatch()
+
+   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post('http://localhost:3030/api/v1/auth/sign-up', 
-    {
-      name:firstName+" "+lastName,
-      email:email,
-      password: password,
-      rePassword: confirmPassword
-    }
-    )
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    dispatch(registerInitiate(firstName,lastName,email,password,confirmPassword));
+    setEmail("");
+    setPassword("");
+    setFirstName("")
+    setLastName("")
+    setConfirmPassword("")
       };
 
+  useEffect(() => {
+
+    if (user) {
+      navigate("/home", { replace: true });
+    }
+  }, [user]);
+  
   return (
     <div className='gradient__bg'>
       <div className='ss__signup section__padd'>
       <div className='ss__signup-start'>
         <div className='ss__signup-container'>
         <div className="ss__signup-container_header">
-          <img  src={lc} alt='logo' />
+        <Link to='/'><img  src={lc} alt='logo' /></Link>
           <h1>Create new account</h1>
           </div>
           <form onSubmit={handleSubmit}>
@@ -80,14 +89,14 @@ const Signup = () => {
             <div className='ss__signup-container_input-place'>
               <div className='ss__signup-input_with_tag'>
                 <p>First name</p>
-                <input type='text' name='First name' onChange={(e)=>setFirstName(e.target.value)} />
+                <input type='text' value={firstName} name='First name' onChange={(e)=>setFirstName(e.target.value)} />
               </div>
               <img src={nameimg} alt='name' />
             </div>
             <div className='ss__signup-container_input-place'>
               <div className='ss__signup-input_with_tag'>
                 <p>Last name</p>
-                <input type='text' name='Last name' onChange={(e)=>setLastName(e.target.value)}/>
+                <input type='text' name='Last name' value={lastName} onChange={(e)=>setLastName(e.target.value)}/>
               </div>
               <img src={nameimg} alt='name' />
             </div>
@@ -95,14 +104,14 @@ const Signup = () => {
             <div className='ss__signup-container_input-place'>
               <div className='ss__signup-input_with_tag'>
                 <p>Email</p>
-                <input type='email' name='Email' onChange={(e)=>setEmail(e.target.value)}/>
+                <input type='email' name='Email' value={email} onChange={(e)=>setEmail(e.target.value)}/>
               </div>
               <img src={emailimg} alt='email' />
             </div>
             <div className='ss__signup-container_input-place'>
               <div className='ss__signup-input_with_tag'>
                 <p>Password</p>
-                <input type={pass1} name='Password' onChange={(e)=>setPassword(e.target.value)}/>
+                <input type={pass1} name='Password' value={password} onChange={(e)=>setPassword(e.target.value)}/>
               </div>
               {hide1 ? (
                 <img src={openEye} alt='openEye' onClick={hideTogel1} />
@@ -113,7 +122,7 @@ const Signup = () => {
             <div className='ss__signup-container_input-place'>
               <div className='ss__signup-input_with_tag'>
                 <p>Confirm Password</p>
-                <input type={pass2} name='Confirm Password' onChange={(e)=>setConfirmPassword(e.target.value)}/>
+                <input type={pass2} name='Confirm Password' value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}/>
               </div>
               {hide2 ? (
                 <img src={openEye} alt='openEye' onClick={hideTogel2} />

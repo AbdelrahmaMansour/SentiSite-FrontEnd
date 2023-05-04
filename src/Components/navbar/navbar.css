@@ -62,6 +62,13 @@
 .ss__navbar-links_container:hover p:not(:hover) {
   color: #a2a2a2;
 }
+.ss__navbar-sign img {
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  border-radius: 50%;
+  max-width: 90px;
+  height: auto;
+}
 
 .ss__navbar-sign button,
 .ss__navbar-menu_container button {
@@ -153,4 +160,12 @@
   .ss__navbar-menu_container-links-sign {
     display: block;
   }
+}
+
+.ss__navbar-menu_container-links-sign img {
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  border-radius: 50%;
+  max-width: 90px;
+  height: auto;
 }

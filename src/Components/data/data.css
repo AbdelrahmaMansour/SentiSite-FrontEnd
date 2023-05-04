@@ -1,0 +1,15 @@
+.Data {
+  text-align: center;
+}
+.dataV {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(40, 42, 55, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 68px;
+  border: 2px solid rgba(40, 42, 55, 0.5);
+  margin: 0 4rem 4rem 4rem;
+  flex-wrap: wrap;
+}

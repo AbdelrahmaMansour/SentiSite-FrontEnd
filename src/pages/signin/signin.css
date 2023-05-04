@@ -134,7 +134,7 @@
   margin: 2rem 0;
   text-align: center;
 }
-.ss__signin-container_header img {
+.ss__signin-container_header Link img {
   width: 60px;
   height: auto;
   margin-right: 0.2rem;
@@ -170,7 +170,6 @@
   /* identical to box height */
 
   color: #ffffff;
-  
 }
 .ss__signin-container_input-place img {
   opacity: 0.4;

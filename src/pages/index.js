@@ -7,4 +7,4 @@ export { default as Analysis } from "./analysis/Analysis";
 export { default as Editprofile } from "./editprofile/Editprofile";
 export { default as Fpassword } from "./fpassword/Fpassword";
 export { default as Rpassword } from "./rpassword/Rpassword";
-
+export { default as Verify } from "./verify/Verify";
